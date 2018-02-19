@@ -32,12 +32,15 @@ exports.update = function(req, res){
     var id = req.params.id;
     var nom = req.body.nom;
 
-    Categorie.findByIdAndUpdate( id, { $set: { nom: nom } },
-        function (err, result) {
-            if (err) return res.status(400).json(err);
-            console.log('Updated '+ result._id +' categorie');
-            return res.sendStatus(202);
-        });
+    if(id){
+        Categorie.findByIdAndUpdate( id, { $set: { nom: nom } },
+            function (err, result) {
+                if (err) return res.status(400).json(err);
+                console.log('Updated '+ result._id +' categorie');
+                return res.sendStatus(202);
+            });
+    }
+    res.sendStatus(404);
 }
 
 exports.delete = function(req, res){

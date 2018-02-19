@@ -15,7 +15,7 @@ router.get('/:id', function(req, res) {
 
 
 // create user
-router.put('/:id', function(req, res) {
+router.put('/create', function(req, res) {
     userController.create(req, res)
 });
 

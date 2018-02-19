@@ -4,7 +4,7 @@ var categorie = require('../controllers/categorie');
 
 // get all categories
 router.get('/', function(req, res) {
-    return categorie.getAll(req, res);
+    return categorie.findAll(req, res);
 });
 
 // get detail of categorie

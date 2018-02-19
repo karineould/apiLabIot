@@ -20,8 +20,7 @@ var ItemSchema = new mongoose.Schema({
     quantite: {
         type: Number,
         default : 1
-    },
-    QRCode: String
+    }
 }, {timestamps: true});
 
 

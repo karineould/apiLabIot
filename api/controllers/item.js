@@ -8,3 +8,10 @@ exports.getAll = function(req, res) {
         res.json(result);
     });
 };
+
+exports.getAll = function(req, res) {
+    Item.find({}, function(err, result) {
+        if (err) res.json(err);
+        res.json(result);
+    });
+};

@@ -4,7 +4,7 @@ var emprunt = require('../controllers/emprunt');
 
 // get all emprunts
 router.get('/', function(req, res) {
-    return emprunt.getAll(req, res);
+    return emprunt.findAll(req, res);
 });
 
 // get detail of emprunt

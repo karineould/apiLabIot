@@ -15,8 +15,9 @@ module.exports  = function(req, res, next) {
             } else {
                 // if everything is good, save to request for use in other routes
                 req.decoded = decoded;
-                res.locals.user_id = req.decoded.user_id;
+                res.locals.userId = req.decoded.userId;
                 res.locals.admin = req.decoded.admin;
+                res.locals.email = req.decoded.email;
                 next();
             }
         });

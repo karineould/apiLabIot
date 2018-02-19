@@ -6,9 +6,9 @@ var mongoose    = require('mongoose'),
     bodyParser = require('body-parser'),
     config = require('./config');
 
-// var userRoutes = require('./api/routes/userRoute');
+var userRoutes = require('./api/routes/user');
 // var authRoutes = require('./api/routes/authRoute');
-// var middlewareAuth = require('./api/middlewares/authenticateMiddleware');
+var middlewareAuth = require('./api/middlewares/authenticate');
 var indexRoutes = require('./api/routes/index');
 
 // mongoose instance connection url connection
@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 
 //routage
 app.use('/', indexRoutes);
-// app.use('/users', [middlewareAuth, userRoutes]); // TODO [middlewareAuth, userRoutes]
+app.use('/users', userRoutes); // TODO [middlewareAuth, userRoutes]
 
 
 

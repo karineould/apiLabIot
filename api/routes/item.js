@@ -4,7 +4,7 @@ var item = require('../controllers/item');
 
 // get all items
 router.get('/', function(req, res) {
-    return item.getAll(req, res);
+    return item.findAll(req, res);
 });
 
 // get detail of item

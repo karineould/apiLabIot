@@ -112,6 +112,7 @@ exports.delete = function(req, res){
 };
 
 
+//crypt user password
 exports.cryptPassword = function(password) {
     var salt = crypto.randomBytes(16).toString('hex');
     var hash = crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex');
@@ -119,11 +120,14 @@ exports.cryptPassword = function(password) {
 };
 
 
+//check user password
 exports.checkPassword = function(req, password, salt) {
     var hash = crypto.pbkdf2Sync(req.body.password, salt, 10000, 512, 'sha512').toString('hex');
     return password === hash;
 };
 
+
+//authenticate user with token
 exports.authenticate = function(req, res){
     // find the user
     User.findOne({

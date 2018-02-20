@@ -28,7 +28,7 @@ exports.findById = function(req, res) {
 //Create user
 exports.create = function(req, res) {
     var email = req.body.email;
-    var password = userController.cryptPassword(req.body.password);
+    var password = this.cryptPassword(req.body.password);
 
     // create a sample user
     var newUser = new User({
@@ -51,10 +51,11 @@ exports.create = function(req, res) {
 };
 
 //Create userAdmin
+//Need to provide the secret_access
 exports.createAdmin = function(req, res) {
     var secret_access = req.body.secret_access;
     var email = req.body.email;
-    var password = userController.cryptPassword(req.body.password);
+    var password = this.cryptPassword(req.body.password);
 
     if (!secret_access) return res.status(401).send({ auth: false, message: 'No secret token provided.' });
     if (secret_access != app.get('secret_access_create_admin')) return res.status(405).send({ auth: false, message: 'No allowed' });
@@ -77,6 +78,7 @@ exports.createAdmin = function(req, res) {
         res.json({ admin: result._id});
     });
 };
+
 
 //update user
 exports.update = function(req, res) {

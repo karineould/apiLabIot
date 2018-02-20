@@ -8,7 +8,7 @@ var mongoose    = require('mongoose'),
 
 var userRoutes = require('./api/routes/user');
 // var authRoutes = require('./api/routes/authRoute');
-var middlewareAuth = require('./api/middlewares/authenticate');
+// var middlewareAuth = require('./api/middlewares/authenticate');
 var indexRoutes = require('./api/routes/index');
 
 // mongoose instance connection url connection
@@ -29,7 +29,6 @@ app.use(bodyParser.json());
 //routage
 app.use('/', indexRoutes);
 app.use('/users', userRoutes); // TODO [middlewareAuth, userRoutes]
-
 
 
 app.listen(port);

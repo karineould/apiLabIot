@@ -7,10 +7,15 @@ router.get('/', function(req, res) {
     userController.findAll(req, res)
 });
 
+//get all users
+router.put('/authenticate', function(req, res) {
+    userController.authenticate(req, res)
+});
+
 
 //get one user by id
 router.get('/:id', function(req, res) {
-   userController.findById(req, res);
+    userController.findById(req, res);
 });
 
 

@@ -53,27 +53,26 @@ exports.create = function(req, res) {
 //Update item
 exports.update = function(req, res) {
     var id = req.params.id;
-    var nom = req.body.nom;
-    var categorie = req.body.categorie;
-    var sousCategorie = req.body.sousCategorie;
-    var quantite = req.body.quantite;
 
     if (id) {
-        Item.findByIdAndUpdate(id, {
-            $set: {
-                nom: nom,
-                categorie: categorie,
-                sousCategorie: sousCategorie,
-                quantite: quantite
-            }
-        }, function (err, result) {
-                if (err) return console.log(err);
-                console.log(result._id);
-                console.log('Updated '+ result._id +' item');
-                return res.sendStatus(202);
-            });
+        Item.findById(id)
+            .then(function(itemObject){
+                var categorie = (req.body.categorie == null ? itemObject.categorie : req.body.categorie);
+                var sousCategorie = (req.body.sousCategorie == null ? itemObject.sousCategorie : req.body.sousCategorie);
+                var nom = (req.body.nom == null ? itemObject.nom : req.body.nom);
+                var quantite = (req.body.quantite == null ? itemObject.quantite : req.body.quantite);
+                Item.findByIdAndUpdate(id,
+                    { $set: { nom: nom, categorie: categorie, sousCategorie: sousCategorie, quantite: quantite }},
+                    { new:true })
+                .then(function (result) {
+                    console.log('Updated '+ result._id +' item');
+                    return res.status(202).json(result);
+                }).catch((err) => { res.send(err); });
+            }).catch((err) => { res.send(err); });
+
+    } else {
+        return res.status(400).json("N'oubliez l'id en paramètre dans l'url");
     }
-    return res.sendStatus(400);
 };
 
 
@@ -86,5 +85,5 @@ exports.delete = function(req, res){
             return res.send({deleted: id});
         });
     }
-    return res.sendStatus(400);
+    return res.status(400).json("N'oubliez l'id en paramètre dans l'url");
 };

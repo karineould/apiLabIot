@@ -16,10 +16,16 @@ var EmpruntSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    dateEnd: Date,
+    dateEnd: {
+        type: Date,
+        default: null
+    },
     etat: {
         type: String,
         enum: ['neuf', 'bon', 'usé', 'détruit']
+    },
+    quantite: { // nombre d'items empruntés
+        type: Number
     }
 }, {timestamps: true});
 

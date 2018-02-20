@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Categorie = require('./Categorie');
+var Categorie = require('./categorie');
 
 // Create sousCategorie schema
 var SousCategorieSchema = new mongoose.Schema({

@@ -87,7 +87,7 @@ exports.update = function(req, res) {
 
     if (id) {
         updates['email'] = req.body.email;
-        updates['password'] = authController.cryptPassword(req.body.password);
+        updates['password'] = this.cryptPassword(req.body.password);
 
         User.findByIdAndUpdate(id, { $set: { email: email, password: password} },
             function (err, result) {
@@ -132,6 +132,7 @@ exports.checkPassword = function(req, password, salt) {
 //authenticate user with token
 exports.authenticate = function(req, res){
     // find the user
+    var userController = this;
     User.findOne({
         email: req.body.email
     }, function(err, user) {
@@ -145,7 +146,7 @@ exports.authenticate = function(req, res){
         } else if (user) {
 
             // check if password matches
-            if (this.checkPassword(req, user.password, user.salt)) {
+            if (userController.checkPassword(req, user.password, user.salt)) {
                 res.json({ success: false, message: 'Authentication failed. Wrong password.' });
             } else {
 

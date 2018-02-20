@@ -6,10 +6,13 @@ var mongoose    = require('mongoose'),
     bodyParser = require('body-parser'),
     config = require('./config');
 
-var userRoutes = require('./api/routes/user');
-// var authRoutes = require('./api/routes/authRoute');
-// var middlewareAuth = require('./api/middlewares/authenticate');
+var middlewareAuth = require('./api/middlewares/authenticate');
 var indexRoutes = require('./api/routes/index');
+var userRoutes = require('./api/routes/user');
+var categorieRoutes = require('./api/routes/categorie');
+var sousCategorieRoutes = require('./api/routes/sousCategorie');
+var itemRoutes = require('./api/routes/item');
+var empruntRoutes = require('./api/routes/emprunt');
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
@@ -29,6 +32,10 @@ app.use(bodyParser.json());
 //routage
 app.use('/', indexRoutes);
 app.use('/users', userRoutes); // TODO [middlewareAuth, userRoutes]
+app.use('/categories', categorieRoutes); // TODO [middlewareAuth, userRoutes]
+app.use('/sousCategories', sousCategorieRoutes); // TODO [middlewareAuth, userRoutes]
+app.use('/items', itemRoutes); // TODO [middlewareAuth, userRoutes]
+app.use('/emprunts', empruntRoutes); // TODO [middlewareAuth, userRoutes]
 
 
 app.listen(port);

@@ -1,17 +1,17 @@
 var mongoose = require('mongoose');
-var Categorie = require('./Categorie');
-var SousCategorie = require('./SousCategorie');
+var Categorie = require('./categorie');
+var SousCategorie = require('./sousCategorie');
 
 // Create item schema
 var ItemSchema = new mongoose.Schema({
     nom: {
         type: String,
-        required: true
+        required: [true, "can't be blank"],
     },
     categorie: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Categorie',
-        required: true
+        required: [true, "can't be blank"],
     },
     sousCategorie: {
         type: mongoose.Schema.Types.ObjectId,

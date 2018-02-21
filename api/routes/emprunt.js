@@ -22,9 +22,16 @@ router.post('/:id', function(req, res) {
     return emprunt.update(req, res);
 });
 
+// delete all emprunts
+router.delete('/reset', function(req, res) {
+    return emprunt.reset(req, res);
+});
+
 // delete emprunt
 router.delete('/:id', function(req, res) {
     return emprunt.delete(req, res);
 });
+
+
 
 module.exports = router;

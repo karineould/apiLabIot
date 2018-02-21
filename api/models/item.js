@@ -6,12 +6,12 @@ var SousCategorie = require('./sousCategorie');
 var ItemSchema = new mongoose.Schema({
     nom: {
         type: String,
-        required: [true, "can't be blank"],
+        required: true
     },
     categorie: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Categorie',
-        required: [true, "can't be blank"],
+        required: true
     },
     sousCategorie: {
         type: mongoose.Schema.Types.ObjectId,
@@ -19,9 +19,22 @@ var ItemSchema = new mongoose.Schema({
     },
     quantite: {
         type: Number,
-        default : 1
+        required: true,
+        validate : {
+            validator: function (quantite) {
+                return quantite >= 0;
+            },
+            message: "{VALUE} is negative"
+        }
     }
 }, {timestamps: true});
+
+// ItemSchema.path('quantite').validate(function(value) {
+//     if (value < 0) {
+//         return false;
+//     }
+//     return true;
+// });
 
 
 module.exports = mongoose.model('Item', ItemSchema);

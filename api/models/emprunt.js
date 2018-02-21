@@ -6,11 +6,11 @@ var EmpruntSchema = new mongoose.Schema({
     item: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item',
-        required: true
+        required: [true, "can't be null"],
     },
     user_mail: {
         type: String,
-        required: true
+        required: [true, "can't be null"],
     },
     dateStart: {
         type: Date,
@@ -22,12 +22,20 @@ var EmpruntSchema = new mongoose.Schema({
     },
     etat: {
         type: String,
+        required: [true, "can't be null"],
         enum: ['neuf', 'bon', 'usé', 'détruit']
     },
     quantite: { // nombre d'items empruntés
-        type: Number
+        type: Number,
+        required: [true, "can't be null"],
+        min: 0,
+        validate : {
+            validator: function (quantite) {
+                return quantite >= 0;
+            },
+            message: "{VALUE} is negative"
+        }
     }
 }, {timestamps: true});
-
 
 module.exports = mongoose.model('Emprunt', EmpruntSchema);

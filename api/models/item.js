@@ -24,7 +24,7 @@ var ItemSchema = new mongoose.Schema({
             validator: function (quantite) {
                 return quantite >= 0;
             },
-            message: "{VALUE} is negative"
+            message: "{VALUE} is negative quantity for item"
         }
     }
 }, {timestamps: true});

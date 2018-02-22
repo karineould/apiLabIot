@@ -80,7 +80,7 @@ exports.update = function(req, res){
                                         {$set: {quantite: itemQuantity}}, {new: true, runValidators: true})
                                         .then(function (updatedItem) {
                                             console.log('update item');
-                                            return res.status(202).json('updated with quantity change');
+                                            return res.status(202).json('success : updated with quantity change');
                                         }).catch((err) => {
                                         res.send(err);
                                     });
@@ -94,12 +94,12 @@ exports.update = function(req, res){
                                             }
                                         }, {new: true, runValidators: true})
                                         .then(function (updatedItem) {
-                                            return res.status(202).json('Update failed because of quantity');
+                                            return res.status(400).json('Update failed because of quantity');
                                         }).catch((err) => { res.send(err);});
                                 }
                             }).catch((err) => { res.send(err);});
                     } else {
-                        return res.status(202).json('updated without quantity change');
+                        return res.status(202).json('success : updated without quantity change');
                     }
                 }).catch((err) => { res.send(err); });
         }).catch((err) => { res.send(err); });

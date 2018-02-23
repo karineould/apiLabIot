@@ -123,8 +123,8 @@ exports.cryptPassword = function(password) {
 
 
 //check user password
-exports.checkPassword = function(req, password, salt) {
-    var hash = crypto.pbkdf2Sync(req.body.password, salt, 10000, 512, 'sha512').toString('hex');
+exports.checkPassword = function(plainPassword, password, salt) {
+    var hash = crypto.pbkdf2Sync(plainPassword, salt, 10000, 512, 'sha512').toString('hex');
     return password === hash;
 };
 
@@ -133,11 +133,16 @@ exports.checkPassword = function(req, password, salt) {
 exports.authenticate = function(req, res){
     // find the user
     var userController = this;
+
+    var email = req.body.email;
+    var password = req.body.password;
+
     User.findOne({
-        email: req.body.email
+        email: email
     }, function(err, user) {
 
         if (err) {
+            console.log(err);
             res.status(500).json(err);
         }
 
@@ -146,7 +151,7 @@ exports.authenticate = function(req, res){
         } else if (user) {
 
             // check if password matches
-            if (userController.checkPassword(req, user.password, user.salt)) {
+            if (userController.checkPassword(password, user.password, user.salt)) {
                 res.json({ success: false, message: 'Authentication failed. Wrong password.' });
             } else {
 

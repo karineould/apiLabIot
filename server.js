@@ -20,7 +20,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(config.database);
 var db = mongoose.connection;
 db.on('error', function () {
-    throw new Error('unable to connect to database at ' + mongoUri);
+    throw new Error('unable to connect to database'); //at ' + mongoUri);
 });
 
 app.set('superSecret', config.secret); // secret variable

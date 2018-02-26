@@ -147,12 +147,12 @@ exports.authenticate = function(req, res){
         }
 
         if (!user) {
-            res.json({ success: false, message: 'Authentication failed. User not found.' });
+            res.json({ success: false, message: { email : 'Email incorrect', password : false } });
         } else if (user) {
 
             // check if password matches
             if (userController.checkPassword(password, user.password, user.salt)) {
-                res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+                res.json({ success: false, message: { email : false, password : 'Mot de passe incorrectp' }  });
             } else {
 
                 // if user is found and password is right

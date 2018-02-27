@@ -15,6 +15,11 @@ router.put('/createAdmin', function(req, res) {
 
 });
 
+//get all users
+router.post('/authenticate', function(req, res) {
+    userController.authenticate(req, res)
+});
+
 
 
 module.exports = router;

@@ -147,7 +147,7 @@ exports.authenticate = function(req, res){
         }
 
         if (!user) {
-            res.json({ success: false, message: { email : 'Email incorrect', password : false } });
+            res.json({ success: false, message: { email : 'Email incorrect', password : false }  });
         } else if (user) {
 
             // check if password matches
@@ -172,7 +172,8 @@ exports.authenticate = function(req, res){
                 res.json({
                     success: true,
                     message: 'Enjoy your token!',
-                    token: token
+                    token: token,
+                    isAdmin: user.admin
                 });
             }
         }

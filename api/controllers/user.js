@@ -45,7 +45,7 @@ exports.create = function(req, res) {
         }
 
         console.log('User saved successfully');
-        res.json({ user: result._id});
+        res.json({ user: result});
     });
 
 };
@@ -105,12 +105,11 @@ exports.update = function(req, res) {
 exports.delete = function(req, res){
     var id = req.params.id;
     if (id) {
-        User.remove({'_id': id}, function (err) {
-            if (err) throw err;
-            return res.send({deleted: id});
+        User.remove({ _id: id}, function (err) {
+            if (err) res.sendStatus(500);
+            return res.json({deleted: id});
         });
     }
-    return res.sendStatus(400);
 };
 
 

@@ -34,7 +34,7 @@ app.use(cors());
 //routage
 app.use('/', indexRoutes);
 app.use('/users', [middlewareAuth, userRoutes]);
-app.use('/categories', categorieRoutes); // TODO [middlewareAuth, userRoutes]
+app.use('/categories', [middlewareAuth, categorieRoutes]); // TODO [middlewareAuth, userRoutes]
 app.use('/sousCategories', sousCategorieRoutes); // TODO [middlewareAuth, userRoutes]
 app.use('/items', itemRoutes); // TODO [middlewareAuth, userRoutes]
 app.use('/emprunts', empruntRoutes); // TODO [middlewareAuth, userRoutes]

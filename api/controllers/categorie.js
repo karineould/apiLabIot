@@ -13,7 +13,7 @@ exports.findById = function(req, res){
         if (err) res.json(err);
         res.json(result);
     });
-}
+};
 
 exports.create = function(req, res){
     var nom = req.body.nom;
@@ -26,7 +26,7 @@ exports.create = function(req, res){
         console.log('Categorie saved successfully');
         res.json(result);
     });
-}
+};
 
 exports.update = function(req, res){
     var id = req.params.id;
@@ -40,13 +40,12 @@ exports.update = function(req, res){
                 return res.sendStatus(202);
             });
     }
-    res.sendStatus(404);
-}
+};
 
 exports.delete = function(req, res){
     var id = req.params.id;
     Categorie.remove({'_id':id },function(err) {
         if (err) throw err;
-        return res.send({deleted : id});
+        return res.json({deleted : id});
     });
 };

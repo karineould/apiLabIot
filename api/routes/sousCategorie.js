@@ -12,6 +12,12 @@ router.get('/:id', function(req, res) {
     return sousCategorie.findById(req, res);
 });
 
+//get the sousCategorie of a Categorie
+router.get('/categorie/:id', function(req, res) {
+    return sousCategorie.findByCatId(req, res);
+});
+
+
 //create sousCategorie
 router.put('/create', function(req, res) {
     return sousCategorie.create(req, res);

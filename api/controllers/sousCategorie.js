@@ -15,10 +15,22 @@ exports.findById = function(req, res) {
 
     if (id) {
         SousCategorie.find({'_id':id},function(err, result) {
+            if (err) res.sendStatus(500);
             return res.send(result);
         });
     }
-    return res.sendStatus(400);
+};
+
+//find sous categorie by id
+exports.findByCatId = function(req, res) {
+    var categorie_id = req.params.id;
+
+    if (categorie_id) {
+        SousCategorie.find({'categorie':categorie_id},function(err, result) {
+            if (err) res.sendStatus(500);
+            return res.json(result);
+        });
+    }
 };
 
 
@@ -36,11 +48,11 @@ exports.create = function(req, res) {
     // save the sample user
     newSousCat.save(function(err, result) {
         if (err){
-            res.status(400).json(err);
+            return res.status(400).json(err);
         }
 
         console.log('Sous-categorie saved successfully');
-        res.json({ sousCategorie: result._id});
+        return res.json({ sousCategorie: result._id});
     });
 
 };

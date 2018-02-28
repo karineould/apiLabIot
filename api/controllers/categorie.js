@@ -28,6 +28,7 @@ exports.create = function(req, res){
     });
 };
 
+
 exports.update = function(req, res){
     var id = req.params.id;
     var nom = req.body.nom;

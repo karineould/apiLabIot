@@ -14,8 +14,8 @@ exports.findById = function(req, res) {
     var id = req.params.id;
     Item.find({'_id':id},function(err, result) {
         if (err) res.send(err);
-        return res.json(result[0]);
-    });
+        res.json(result[0]);
+    }).populate('categorie', 'nom').populate('sousCategorie', 'nom');
 
 };
 

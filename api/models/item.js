@@ -29,12 +29,12 @@ var ItemSchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
-// ItemSchema.path('quantite').validate(function(value) {
-//     if (value < 0) {
-//         return false;
-//     }
-//     return true;
-// });
-
+ItemSchema.statics.deleteFromCatId = function (id) {
+    this.deleteMany({categorie: id},(err)=>{
+        if(err) {
+            throw err;
+        }
+    });
+}
 
 module.exports = mongoose.model('Item', ItemSchema);

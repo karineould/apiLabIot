@@ -5,7 +5,7 @@ exports.findAll = function(req, res) {
     Item.find({}, function(err, result) {
         if (err) res.send(err);
         res.json(result);
-    });
+    }).populate('categorie', 'nom').populate('sousCategorie', 'nom');
 };
 
 
@@ -35,10 +35,10 @@ exports.create = function(req, res) {
     });
 
     newItem.save(function(err, result) {
-        if (err) res.status(400).json(err);
+        if (err) return res.status(400).json(err);
 
         console.log('Item saved successfully');
-        res.json({ item: result._id});
+        return res.json({ item: result._id});
     });
 
 };

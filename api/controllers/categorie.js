@@ -48,9 +48,7 @@ exports.delete = function(req, res){
     var id = req.params.id;
     
     Categorie.remove({'_id':id },function(err) {
-        if (err) {
-            throw err;
-        }
+        if (err) res.send(err);
         SousCategorie.deleteFromCatId(id);
         Item.deleteFromCatId(id);
         return res.json({deleted : id});

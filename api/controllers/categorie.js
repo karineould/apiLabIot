@@ -38,7 +38,7 @@ exports.update = function(req, res){
             function (err, result) {
                 if (err) return res.status(400).json(err);
                 console.log('Updated '+ result._id +' categorie');
-                return res.sendStatus(202);
+                return res.status(202).json({updated:result._id});
             });
     }
 };

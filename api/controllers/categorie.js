@@ -1,5 +1,6 @@
 var Categorie   = require('../models/categorie');
-
+var SousCategorie   = require('../models/sousCategorie');
+var Item = require('../models/item');
 exports.findAll = function(req, res) {
     Categorie.find({}, function(err, result) {
         if (err) res.json(err);
@@ -45,8 +46,11 @@ exports.update = function(req, res){
 
 exports.delete = function(req, res){
     var id = req.params.id;
+    
     Categorie.remove({'_id':id },function(err) {
         if (err) res.send(err);
+        SousCategorie.deleteFromCatId(id);
+        Item.deleteFromCatId(id);
         return res.json({deleted : id});
     });
 };

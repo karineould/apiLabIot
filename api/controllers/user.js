@@ -41,11 +41,11 @@ exports.create = function(req, res) {
     // save the sample user
     newUser.save(function(err, result) {
         if (err){
-            res.status(400).json(err);
+            return res.status(400).json(err);
         }
 
         console.log('User saved successfully');
-        res.json({ user: result});
+        return res.json({ user: result});
     });
 
 };

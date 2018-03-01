@@ -23,9 +23,9 @@ exports.create = function(req, res){
     });
 
     categorie.save(function(err, result) {
-        if (err) res.status(400).json(err);
+        if (err) res.status(500).json(err);
         console.log('Categorie saved successfully');
-        res.json(result);
+        res.status(202).json(result);
     });
 };
 
@@ -37,16 +37,16 @@ exports.update = function(req, res){
     if(id){
         Categorie.findByIdAndUpdate( id, { $set: { nom: nom } },
             function (err, result) {
-                if (err) return res.status(400).json(err);
+                if (err) return res.status(500).json(err);
                 console.log('Updated '+ result._id +' categorie');
-                return res.status(202).json({updated:result._id});
+                return res.json({updated:result._id});
             });
     }
 };
 
 exports.delete = function(req, res){
     var id = req.params.id;
-    
+
     Categorie.remove({'_id':id },function(err) {
         if (err) res.send(err);
         SousCategorie.deleteFromCatId(id);

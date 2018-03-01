@@ -23,7 +23,7 @@ var EmpruntSchema = new mongoose.Schema({
     etat: {
         type: String,
         required: [true, "can't be null"],
-        enum: ['neuf', 'bon', 'usé', 'détruit']
+        enum: ['Neuf', 'Bon', 'Usé', 'Détruit']
     },
     quantite: { // nombre d'items empruntés
         type: Number,

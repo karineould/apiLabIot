@@ -67,7 +67,13 @@ exports.update = function(req, res){
 
             // On check si ces paramètres ont été envoyé sinon on remet les anciens
             if (req.body.etat) { updates.etat = req.body.etat ; }
-            if (req.body.dateEnd) { updates.dateEnd = req.body.dateEnd ; }
+
+            // si on rend tout ce qu'on a emprunter on met une date de fin
+            if(isEmprunt == "false"
+                && oldEmprunt.quantite == parseInt(req.body.quantite))
+            {
+                updates.dateEnd = Date.now ;
+            }
 
             if (req.body.quantite) {
                 updates.quantite = (isEmprunt == 'true' ?
@@ -113,7 +119,7 @@ exports.update = function(req, res){
                         return res.status(202).json('success : updated without quantity change');
                     }
                 }).catch((err) => { res.send(err); });
-        }).catch((err) => { res.send(err); });
+        }).catch((err) => { console.log(err); res.send(err); });
 
 };
 

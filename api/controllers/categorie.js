@@ -46,7 +46,7 @@ exports.update = function(req, res){
 exports.delete = function(req, res){
     var id = req.params.id;
     Categorie.remove({'_id':id },function(err) {
-        if (err) throw err;
+        if (err) res.send(err);
         return res.json({deleted : id});
     });
 };

@@ -12,7 +12,7 @@ exports.findById = function(req, res){
     var id = req.params.id;
     Emprunt.findById(id, function(err, result) {
         if (err) res.json(err);
-        res.json(result);
+        res.json(result[0]);
     });
 };
 
@@ -43,7 +43,18 @@ exports.create = function(req, res){
 
 
 };
-//a revoir
+
+exports.findByUserMailAndItem = function(req, res){
+    var user_mail = req.body.user_mail;
+    var item = req.body.item;
+
+    Emprunt.find({"item": item, "user_mail": user_mail}, function(err, result){
+        if (err) res.json(err);
+        res.json(result[0]);
+    })
+}
+
+
 exports.update = function(req, res){
     var id = req.params.id;
     var isEmprunt = req.body.isEmprunt;
@@ -109,14 +120,14 @@ exports.update = function(req, res){
 exports.delete = function(req, res){
     var id = req.params.id;
     Emprunt.remove({'_id':id },function(err) {
-        if (err) throw err;
+        if (err) res.send(err);
         return res.send({deleted : id});
     });
 };
 
 exports.reset = function(req, res){
     Emprunt.remove({}, function(err) {
-        if (err) throw err;
+        if (err) res.send(err);
         return res.send({deleted : 'ok'});
     });
 };

@@ -63,21 +63,30 @@ exports.update = function(req, res) {
     var id = req.params.id;
     var nom = req.body.nom;
     var categorie = req.body.categorie;
+    var toUpdate = {};
+    if(req.body.nom && req.body.categorie) {
+      toUpdate = {
+        nom: nom,
+        categorie: categorie
+      }
+    } else if ( req.body.categorie) {
+      toUpdate = {
+        categorie: categorie
+      }
+    }
 
     if (id) {
         SousCategorie.findByIdAndUpdate(id, {
-            $set: {
-                nom: nom,
-                categorie: categorie
-            }
+            $set: toUpdate
         }, function (err, result) {
             if (err) return console.log(err);
             console.log(result._id);
             console.log('Updated '+ result._id +' sous categorie');
             return res.sendStatus(202);
         });
+    } else {
+      return res.sendStatus(400);
     }
-    return res.sendStatus(400);
 };
 
 
@@ -86,9 +95,10 @@ exports.delete = function(req, res){
     var id = req.params.id;
     if (id) {
         SousCategorie.remove({'_id': id}, function (err) {
-            if (err) res.send(err);
+            if (err) throw err;
             return res.send({deleted: id});
         });
+    } else {
+      return res.sendStatus(400);
     }
-    return res.sendStatus(400);
 };

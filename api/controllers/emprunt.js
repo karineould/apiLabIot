@@ -72,7 +72,7 @@ exports.update = function(req, res){
             if(isEmprunt == "false"
                 && oldEmprunt.quantite == parseInt(req.body.quantite))
             {
-                updates.dateEnd = Date.now ;
+                updates.dateEnd = new Date() ;
             }
 
             if (req.body.quantite) {

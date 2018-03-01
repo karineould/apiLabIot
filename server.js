@@ -35,9 +35,9 @@ app.use(cors());
 app.use('/', indexRoutes);
 app.use('/users', [middlewareAuth, userRoutes]);
 app.use('/categories', [middlewareAuth, categorieRoutes]); // TODO [middlewareAuth, userRoutes]
-app.use('/sousCategories', sousCategorieRoutes); // TODO [middlewareAuth, userRoutes]
-app.use('/items', itemRoutes); // TODO [middlewareAuth, userRoutes]
-app.use('/emprunts', empruntRoutes); // TODO [middlewareAuth, userRoutes]
+app.use('/sousCategories', [middlewareAuth, sousCategorieRoutes]); // TODO [middlewareAuth, userRoutes]
+app.use('/items', [middlewareAuth, itemRoutes]); // TODO [middlewareAuth, userRoutes]
+app.use('/emprunts', [middlewareAuth, empruntRoutes]); // TODO [middlewareAuth, userRoutes]
 
 
 app.listen(port);

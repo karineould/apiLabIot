@@ -17,6 +17,11 @@ router.put('/create', function(req, res) {
     return emprunt.create(req, res);
 });
 
+// get id emprunt by user_mail & item
+router.post('/byUserAndItem', function(req, res) {
+    return emprunt.findByUserMailAndItem(req, res);
+});
+
 // update emprunt
 router.post('/:id', function(req, res) {
     return emprunt.update(req, res);

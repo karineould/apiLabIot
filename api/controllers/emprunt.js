@@ -5,7 +5,7 @@ exports.findAll = function(req, res) {
     Emprunt.find({}, function(err, result) {
         if (err) res.json(err);
         res.json(result);
-    });
+    }).populate('item', 'nom');
 };
 
 exports.findById = function(req, res){
